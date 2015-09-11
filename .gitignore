@@ -55,3 +55,13 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Eclipse / other
+.settings
+.project
+.pydevproject
+.directory
+
+# PyQt builds
+qtrst/ui/main.py
+qtrst/ui/resources_rc.py
