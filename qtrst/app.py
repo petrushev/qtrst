@@ -4,6 +4,7 @@ from cStringIO import StringIO
 
 from docutils.core import Publisher
 from docutils.io import StringInput, StringOutput
+from docutils.utils import SystemMessage
 
 from PyQt5.QtWidgets import QMainWindow, QFileDialog, QWidget
 from PyQt5.QtGui import QFont
@@ -37,7 +38,12 @@ class Translator(object):
 
         tmp_stderr = sys.stderr
         sys.stderr = StringIO()
-        output = self.pub.publish(enable_exit_status=False)
+
+        try:
+            output = self.pub.publish(enable_exit_status=False)
+        except SystemMessage, err:
+            output = unicode(err.message)
+
         sys.stderr = tmp_stderr
 
         self._cache[text_hash] = output
