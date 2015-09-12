@@ -54,7 +54,6 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         QMainWindow.__init__(self)
         Ui_MainWindow.setupUi(self, self)
 
-        self.previewTypeSource = False
         self.resultHtml = ''
 
         # monospace font
@@ -67,11 +66,9 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
         self.translator = Translator()
 
-    @pyqtSlot(bool)
-    def togglePreviewType(self, checked):
-        self.previewTypeSource = checked
-
-        self.refreshPreview()
+    @property
+    def previewTypeSource(self):
+        return not self.togglePreviewTypeButton.isChecked()
 
     @pyqtSlot()
     def textChanged(self):

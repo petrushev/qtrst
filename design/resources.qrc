@@ -1,6 +1,11 @@
 <RCC>
   <qresource prefix="icons">
-    <file>assets/disk.png</file>
+    <file>assets/new.svgz</file>
+    <file>assets/open.svgz</file>
+    <file>assets/preview.svgz</file>
+    <file>assets/revert.svgz</file>
+    <file>assets/save-as.svgz</file>
+    <file>assets/save.svgz</file>
   </qresource>
   <qresource prefix="css"/>
 </RCC>

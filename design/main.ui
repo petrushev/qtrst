@@ -27,16 +27,19 @@
        <widget class="QPushButton" name="saveRstButton">
         <property name="maximumSize">
          <size>
-          <width>40</width>
+          <width>35</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="toolTip">
+         <string>Save As...</string>
         </property>
         <property name="text">
          <string/>
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/icons/assets/disk.png</normaloff>:/icons/assets/disk.png</iconset>
+          <normaloff>:/icons/assets/save-as.svgz</normaloff>:/icons/assets/save-as.svgz</iconset>
         </property>
        </widget>
       </item>
@@ -102,16 +105,19 @@
         <widget class="QPushButton" name="saveHtmlButton">
          <property name="maximumSize">
           <size>
-           <width>40</width>
+           <width>35</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="toolTip">
+          <string>Export html...</string>
          </property>
          <property name="text">
           <string/>
          </property>
          <property name="icon">
           <iconset resource="resources.qrc">
-           <normaloff>:/icons/assets/disk.png</normaloff>:/icons/assets/disk.png</iconset>
+           <normaloff>:/icons/assets/save-as.svgz</normaloff>:/icons/assets/save-as.svgz</iconset>
          </property>
         </widget>
        </item>
@@ -119,18 +125,25 @@
         <widget class="QPushButton" name="togglePreviewTypeButton">
          <property name="maximumSize">
           <size>
-           <width>40</width>
+           <width>35</width>
            <height>16777215</height>
           </size>
          </property>
+         <property name="toolTip">
+          <string>Preview as html</string>
+         </property>
          <property name="text">
-          <string>S&amp;RC</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/icons/assets/preview.svgz</normaloff>:/icons/assets/preview.svgz</iconset>
          </property>
          <property name="checkable">
           <bool>true</bool>
          </property>
          <property name="checked">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -269,12 +282,12 @@
   </connection>
   <connection>
    <sender>togglePreviewTypeButton</sender>
-   <signal>clicked(bool)</signal>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>togglePreviewType(bool)</slot>
+   <slot>textChanged()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>29</x>
+     <x>27</x>
      <y>555</y>
     </hint>
     <hint type="destinationlabel">
