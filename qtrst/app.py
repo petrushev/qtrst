@@ -18,12 +18,14 @@ class Translator(object):
 
     def __init__(self):
         # publisher is used for html generation
-        self.pub = Publisher(None, None, None, settings=None,
+        pub = Publisher(None, None, None, settings=None,
                              source_class=StringInput,
                              destination_class=StringOutput)
-        self.pub.set_components('standalone', 'restructuredtext', 'html')
-        self.pub.process_programmatic_settings(None, None, None)
-        self.pub.set_destination(None, None)
+        pub.set_components('standalone', 'restructuredtext', 'html')
+        pub.process_programmatic_settings(None, None, None)
+        pub.set_destination(None, None)
+
+        self.pub = pub
 
     def translate(self, text):
         text_hash = md5(text.encode('utf-8')).digest()
@@ -31,14 +33,19 @@ class Translator(object):
             return self._cache[text_hash]
 
         # apply transform
+        self.pub.set_source(text, None)
+
         tmp_stderr = sys.stderr
         sys.stderr = StringIO()
-        self.pub.set_source(unicode(text), None)
         output = self.pub.publish(enable_exit_status=False)
         sys.stderr = tmp_stderr
 
         self._cache[text_hash] = output
         return output
+
+    def close(self):
+        self._cache.clear()
+        self.pub.set_source(None, None)
 
 
 class MainWindow(Ui_MainWindow, QMainWindow):
@@ -57,13 +64,6 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
         self.inputBox.setFont(font)
         self.resultDock.setTitleBarWidget(QWidget())
-
-        self.inputBox.textChanged.connect(self.textChanged)
-        self.saveHtmlAction.triggered.connect(self.saveHtmlAs)
-        self.saveHtmlButton.clicked.connect(self.saveHtmlAs)
-        self.saveRstAction.triggered.connect(self.saveRstAs)
-        self.saveRstButton.clicked.connect(self.saveRstAs)
-        self.togglePreviewTypeButton.clicked.connect(self.togglePreviewType)
 
         self.translator = Translator()
 
@@ -107,3 +107,10 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         with open(filename, 'w') as f:
             rst = self.inputBox.document().toPlainText()
             f.write(rst)
+
+    def closeEvent(self, *args, **kwargs):
+        result = QMainWindow.closeEvent(self, *args, **kwargs)
+
+        self.translator.close()
+
+        return result

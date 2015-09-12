@@ -186,5 +186,108 @@
  <resources>
   <include location="resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>saveHtmlAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>saveHtmlAs()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveHtmlButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>saveHtmlAs()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>29</x>
+     <y>517</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveRstAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>saveRstAs()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveRstButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>saveRstAs()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>24</x>
+     <y>49</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>inputBox</sender>
+   <signal>textChanged()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>textChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>244</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>togglePreviewTypeButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>togglePreviewType(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>29</x>
+     <y>555</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>togglePreviewType(bool)</slot>
+  <slot>textChanged()</slot>
+  <slot>saveHtmlAs()</slot>
+  <slot>saveRstAs()</slot>
+ </slots>
 </ui>
