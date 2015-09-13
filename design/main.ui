@@ -22,7 +22,67 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_1">
+     <layout class="QVBoxLayout" name="rstToolbar">
+      <item>
+       <widget class="QPushButton" name="newDocButton">
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>New</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/assets/new.svgz</normaloff>:/icons/assets/new.svgz</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="openDocButton">
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Open</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/assets/open.svgz</normaloff>:/icons/assets/open.svgz</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="saveRstChangesButton">
+        <property name="maximumSize">
+         <size>
+          <width>35</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Save</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="resources.qrc">
+          <normaloff>:/icons/assets/save.svgz</normaloff>:/icons/assets/save.svgz</iconset>
+        </property>
+       </widget>
+      </item>
       <item>
        <widget class="QPushButton" name="saveRstButton">
         <property name="maximumSize">
@@ -44,7 +104,7 @@
        </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer">
+       <spacer name="verticalSpacer_1">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -82,10 +142,21 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="newDocAction"/>
+    <addaction name="openDocAction"/>
+    <addaction name="saveRstChangesAction"/>
     <addaction name="saveRstAction"/>
     <addaction name="saveHtmlAction"/>
+    <addaction name="revertAction"/>
+   </widget>
+   <widget class="QMenu" name="menu_Settings">
+    <property name="title">
+     <string>Setti&amp;ngs</string>
+    </property>
+    <addaction name="toggleSourceViewAction"/>
    </widget>
    <addaction name="menu_File"/>
+   <addaction name="menu_Settings"/>
   </widget>
   <widget class="QDockWidget" name="resultDock">
    <property name="features">
@@ -188,11 +259,74 @@
    </property>
   </action>
   <action name="saveRstAction">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icons/assets/save-as.svgz</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Save rst &amp;as</string>
+   </property>
+  </action>
+  <action name="newDocAction">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icons/assets/new.svgz</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="openDocAction">
+   <property name="icon">
+    <iconset>
+     <normalon>:/icons/assets/open.svgz</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="saveRstChangesAction">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/assets/save.svgz</normaloff>:/icons/assets/save.svgz</iconset>
+   </property>
    <property name="text">
     <string>&amp;Save rst</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="revertAction">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/assets/revert.svgz</normaloff>:/icons/assets/revert.svgz</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Revert</string>
+   </property>
+  </action>
+  <action name="toggleSourceViewAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Preview &amp;html</string>
    </property>
   </action>
  </widget>
@@ -296,11 +430,144 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>newDocAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>newDoc()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>newDocButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>newDoc()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>24</x>
+     <y>49</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>openDocAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>openDoc()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>openDocButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>openDoc()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>24</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toggleSourceViewAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>textChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveRstChangesButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>saveChangesRst()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>24</x>
+     <y>125</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveRstChangesAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>saveChangesRst()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>revertAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>revert()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>togglePreviewType(bool)</slot>
   <slot>textChanged()</slot>
   <slot>saveHtmlAs()</slot>
   <slot>saveRstAs()</slot>
+  <slot>newDoc()</slot>
+  <slot>openDoc()</slot>
+  <slot>saveChangesHtml()</slot>
+  <slot>revert()</slot>
+  <slot>saveChangesRst()</slot>
  </slots>
 </ui>
